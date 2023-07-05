@@ -26,8 +26,23 @@ class Solution:
             current_index = self.rNumerals.index(s[i])
             next_index = self.rNumerals.index(s[i + 1])
 
-            if self.rNumerals[current_index] == "I" and self.rNumerals[next_index] == "V":
+            if(
+                (self.rNumerals[current_index] == "I" and self.rNumerals[next_index] == "V") or
+                (self.rNumerals[current_index] == "I" and self.rNumerals[next_index] == "X")
+            ):
                 pass
+            elif(
+                (self.rNumerals[current_index] == "X" and self.rNumerals[next_index] == "L") or
+                (self.rNumerals[current_index] == "X" and self.rNumerals[next_index] == "C")
+            ):
+                pass
+            elif(
+                (self.rNumerals[current_index] == "C" and self.rNumerals[next_index] == "D") or
+                (self.rNumerals[current_index] == "C" and self.rNumerals[next_index] == "M")
+            ):
+                pass
+            else:
+                return False
             
         return True
 
