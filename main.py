@@ -42,7 +42,7 @@ class Solution:
             ):
                 pass
             else:
-                return True
+                return False
             
         return True
 
