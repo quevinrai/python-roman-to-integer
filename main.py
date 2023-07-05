@@ -1,13 +1,13 @@
 import sys
 
-# --------------------------------------------- CLASSES --------------------------------------------- #
+"""CLASSES"""
 
 class Solution:
     rNumerals = ["M", "D", "C", "L", "X", "V", "I"]
     arabicNumbers = [1000, 500, 100, 50, 10, 5, 1]
 
-    # Validation method to check if the roman numeral entered is valid
-    def validateString(self, s: str) -> bool:
+    """Validation method to check if the roman numeral entered is valid"""
+    def validate_string(self, s: str) -> bool:
         # CONSTRAINT 1: 's' string length is between 1 - 15 inclusive
         if len(s) < 1 or len(s) > 15:
             print("The length of the roman numerals entered must be from 1 to 15.")
@@ -23,18 +23,18 @@ class Solution:
             
         # RULE 1: Order of roman numerals must be descending
         for i in range(len(s)):
-            currentIndex = self.rNumerals.index(s[i])
-            nextIndex = self.rNumerals.index(s[i + 1])
+            current_index = self.rNumerals.index(s[i])
+            next_index = self.rNumerals.index(s[i + 1])
 
-            if self.rNumerals[currentIndex] == "I" and self.rNumerals[nextIndex] == "V":
+            if self.rNumerals[current_index] == "I" and self.rNumerals[next_index] == "V":
                 pass
             
         return True
 
-    # Main method to convert roman numerals to integer
-    def romanToInt(self, s: str) -> int:
+    """Main method to convert roman numerals to integer"""
+    def roman_to_int(self, s: str) -> int:
         # Check if validateString method returns false, then exit system
-        if not self.validateString(s):
+        if not self.validate_string(s):
             sys.exit()
 
         # Variable declarations
@@ -43,16 +43,16 @@ class Solution:
 
         # Loop through all characters of 's' string
         for i in range(len(s)):
-            currentIndex = self.rNumerals.index(s[i])
-            total += self.arabicNumbers[currentIndex]
+            current_index = self.rNumerals.index(s[i])
+            total += self.arabicNumbers[current_index]
 
         return total
 
-# --------------------------------------------- MAIN CODE --------------------------------------------- #
+"""MAIN CODE"""
 
 s = "MCMXIV"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
 print(f"Roman Numeral: {s}")
-print(f"Integer: {sol.romanToInt(s)}")
+print(f"Integer: {sol.roman_to_int(s)}")
