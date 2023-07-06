@@ -14,7 +14,7 @@ class Solution:
 
         for i, letter in s_iter:
             current_index = self.roman_numerals.index(letter)
-            next_index = self.roman_numerals.index(s[i + 1]) if i < s_length - 1 else None
+            next_index = self.roman_numerals.index(s[i + 1]) if i < s_length - 1 else 0
 
             if(
                 (self.roman_numerals[current_index] == "I" and self.roman_numerals[next_index] == "V") or
@@ -52,8 +52,16 @@ class Solution:
         self.get_ordered_values(s)
 
         # RULE 1: Order of roman numerals must be descending
+        for i in range(len(self.ordered_values)):
+            if i >= len(self.ordered_values) - 1:
+                break
 
-            
+            if self.ordered_values[i] < self.ordered_values[i + 1]:
+                print("Invalid roman numerator. Values are not in descending order.")
+                return False
+        
+        
+
         return True
 
     """Method to convert roman numerals to integer"""
@@ -78,6 +86,7 @@ s = "MCMXIV"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
+print("------------------------\n")
 print(f"Roman Numeral: {s}")
 print(f"Integer: {sol.roman_to_int(s.upper())}")
 print(sol.ordered_values)
