@@ -69,7 +69,7 @@ class Solution:
         
         'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
         """
-        
+
         exp = re.search("[MCXI]{4,}", s)
 
         if exp is not None:
@@ -85,7 +85,11 @@ class Solution:
         # If 's' passes all constraints, run get_ordered_values
         self.get_ordered_values(s)
 
-        # RULE 1: Order of roman numerals must be descending
+        """RULE 1:
+        
+        Order of roman numerals must be descending
+        """
+        
         for i in range(len(self.ordered_values)):
             if i >= len(self.ordered_values) - 1:
                 break
