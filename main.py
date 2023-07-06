@@ -32,12 +32,20 @@ class Solution:
                 self.ordered_values.append(self.arabic_numbers[current_index])
 
     def validate_string(self, s: str) -> bool:
-        # CONSTRAINT 1: 's' string length is between 1 - 15 inclusive
+        """CONSTRAINT #1:
+        
+        's' string length is between 1 - 15 inclusive
+        """
+
         if len(s) < 1 or len(s) > 15:
             print("The length of the roman numerals entered must be from 1 to 15.")
             return False
         
-        # CONSTRAINT 2: Throw error if the roman numeral entered contains an invalid character
+        """CONSTRAINT #2:
+        
+        Throw error if the roman numeral entered contains an invalid character.
+        """
+
         for i in range(len(s)):
             try:
                 self.roman_numerals.index(s[i])
@@ -45,7 +53,11 @@ class Solution:
                 print("Roman numerals can only contain the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').")
                 return False
             
-        # CONSTRAINT 3: 'D', 'L', and 'V' can only appear once
+        """CONSTRAINT #3:
+        
+        'D', 'L', and 'V' can only appear once
+        """
+
         if (s.count("D") > 1 or
             s.count("L") > 1 or
             s.count("V") > 1
@@ -53,12 +65,22 @@ class Solution:
             print("Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once.")
             return False
         
-        # CONSTRAINT 4: 'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
+        """CONSTRAINT #4:
+        
+        'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
+        """
+        
         exp = re.search("[MCXI]{4,}", s)
 
         if exp is not None:
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
+        
+        """CONSTRAINT #5:
+        
+        Only I, X, and C can be used for subtraction (V, L, and D cannot).
+        Therefore, the following pairs of letter are invalid: VX, VL, VC, VD, VM, LC, LD, LM, DM.
+        """
 
         # If 's' passes all constraints, run get_ordered_values
         self.get_ordered_values(s)
