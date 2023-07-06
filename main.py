@@ -1,4 +1,5 @@
 import sys
+import re
 
 class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
@@ -45,8 +46,20 @@ class Solution:
                 return False
             
         # CONSTRAINT 3: 'D', 'L', and 'V' can only appear once
-        if s.count("D") > 1 or s.count("L") > 1 or s.count("V") > 1:
+        if (s.count("D") > 1 or
+            s.count("L") > 1 or
+            s.count("V") > 1
+        ):
             print("Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once.")
+            return False
+        
+        # CONSTRAINT 4: 'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
+        if (s.count("M") > 3 or
+            s.count("C") > 3 or
+            s.count("X") > 3 or
+            s.count("I") > 3
+        ):
+            print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
 
         # If 's' passes all constraints, run get_ordered_values
@@ -78,7 +91,7 @@ class Solution:
 
         return total
 
-s = "MCMXIV"
+s = "CL"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
