@@ -1,13 +1,10 @@
 import sys
 
-"""CLASSES"""
-
 class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
     arabic_numbers = [1000, 500, 100, 50, 10, 5, 1]
     ordered_values = list()
 
-    """Method to convert roman numerals to integer"""
     def get_ordered_values(self, s: str):
         s_length = len(s)
         s_iter = enumerate(iter(s))
@@ -33,7 +30,6 @@ class Solution:
             else:
                 self.ordered_values.append(self.arabic_numbers[current_index])
 
-    """Method to validate or check if the roman numeral entered is valid"""
     def validate_string(self, s: str) -> bool:
         # CONSTRAINT 1: 's' string length is between 1 - 15 inclusive
         if len(s) < 1 or len(s) > 15:
@@ -60,11 +56,11 @@ class Solution:
                 print("Invalid roman numerator. Values are not in descending order.")
                 return False
         
-        
+        # RULE 2: 'D', 'L', and 'V' can only appear once
+
 
         return True
 
-    """Method to convert roman numerals to integer"""
     def roman_to_int(self, s: str) -> int:
         # Check if validateString method returns false, then exit system
         if not self.validate_string(s):
@@ -79,8 +75,6 @@ class Solution:
             total += self.ordered_values[i]
 
         return total
-
-"""MAIN CODE"""
 
 s = "MCMXIV"
 sol = Solution()
