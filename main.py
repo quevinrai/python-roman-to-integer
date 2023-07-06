@@ -44,6 +44,11 @@ class Solution:
                 print("Roman numerals can only contain the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').")
                 return False
             
+        # CONSTRAINT 3: 'D', 'L', and 'V' can only appear once
+        if s.count("D") > 1 or s.count("L") > 1 or s.count("V") > 1:
+            print("Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once.")
+            return False
+
         # If 's' passes all constraints, run get_ordered_values
         self.get_ordered_values(s)
 
@@ -56,9 +61,6 @@ class Solution:
                 print("Invalid roman numerator. Values are not in descending order.")
                 return False
         
-        # RULE 2: 'D', 'L', and 'V' can only appear once
-
-
         return True
 
     def roman_to_int(self, s: str) -> int:
