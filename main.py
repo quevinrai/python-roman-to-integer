@@ -54,11 +54,9 @@ class Solution:
             return False
         
         # CONSTRAINT 4: 'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
-        if (s.count("M") > 3 or
-            s.count("C") > 3 or
-            s.count("X") > 3 or
-            s.count("I") > 3
-        ):
+        exp = re.search("[MCXI]{4,}", s)
+
+        if exp is not None:
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
 
