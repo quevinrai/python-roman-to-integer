@@ -82,9 +82,9 @@ class Solution:
         Therefore, the following pairs of letter are invalid: VX, VL, VC, VD, VM, LC, LD, LM, DM.
         """
 
-        constraint_five_regex = re.search("[V][XLCDM]|[L][CDM]|[D][M]", s)
+        constraint_5_regex = re.search("[V][XLCDM]|[L][CDM]|[D][M]", s)
 
-        if constraint_five_regex is not None:
+        if constraint_5_regex is not None:
             print("Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot).")
             print("Therefore, the following pairs of letter are invalid: 'VX', 'VL', 'VC', 'VD', 'VM', 'LC', 'LD', 'LM', 'DM'.")
             return False
@@ -96,9 +96,9 @@ class Solution:
         Therefore, the following pairs of letters are invalid: IL, IC, ID, IM, XD, XM.
         """
 
-        constraint_six_regex = re.search("[I][LCDM]|[X][DM]", s)
+        constraint_6_regex = re.search("[I][LCDM]|[X][DM]", s)
 
-        if constraint_six_regex is not None:
+        if constraint_6_regex is not None:
             print("Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction.")
             print("Therefore, the following pairs of letters are invalid: 'IL', 'IC', 'ID', 'IM', 'XD', 'XM'.")
             return False
@@ -114,6 +114,25 @@ class Solution:
 
         if constraint_7_1_regex is not None or constraint_7_2_regex is not None:
             print("Invalid roman numeral. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from.")
+            return False
+        
+        """CONSTRAINT #8:
+        
+        Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may
+        appear again in the string - so neither X nor V can follow IX, neither C nor L may follow XC, and
+        neither M nor D may follow CM.
+        """
+
+        constraint_8_1_regex = re.search("IX[XV]", s)
+        constraint_8_2_regex = re.search("XC[CL]", s)
+        constraint_8_3_regex = re.search("CM[MD]", s)
+
+        if (constraint_8_1_regex is not None or
+            constraint_8_2_regex is not None or
+            constraint_8_3_regex is not None
+        ):
+            print("Invalid roman numeral. Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string.")
+            print("Neither X nor V can follow IX, neither C nor L may follow XC, and neither M nor D may follow CM.")
             return False
 
         """If 's' passes all constraints, run get_ordered_values"""
