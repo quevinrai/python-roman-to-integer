@@ -116,10 +116,18 @@ class Solution:
         
         """RULE #6: When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction"""
 
-        constraint_6_regex = re.search("[I][LCDM]|[X][DM]", s)
-
-        if constraint_6_regex is not None:
-            sys.exit("Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction.")
+        for i in range(len(s)):
+            try:
+                if (s[i] == "I" and s[i + 1] == "L" or
+                    s[i] == "I" and s[i + 1] == "C" or
+                    s[i] == "I" and s[i + 1] == "D" or
+                    s[i] == "I" and s[i + 1] == "M" or
+                    s[i] == "X" and s[i + 1] == "D" or
+                    s[i] == "X" and s[i + 1] == "M"
+                ):
+                    sys.exit("Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction.")
+            except:
+                break
         
         """RULE #7: Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from"""
 
