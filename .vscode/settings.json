@@ -1,4 +1,5 @@
 {
     "git.suggestSmartCommit": false,
-    "git.smartCommitChanges": "tracked"
+    "git.smartCommitChanges": "all",
+    "remoteHub.staging.smart": false
 }
