@@ -134,6 +134,25 @@ class Solution:
             print("Invalid roman numeral. Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string.")
             print("Neither X nor V can follow IX, neither C nor L may follow XC, and neither M nor D may follow CM.")
             return False
+        
+        """CONSTRAINT #9:
+        
+        A letter cannot be used as a subtraction modifier if that letter, or the next highest
+        multiple of 5, appears previously in the string - so IV or IX cannot follow I or V, XL or
+        XC cannot follow X or L, and CD or CM cannot follow C or D.
+        """
+
+        constraint_9_1_regex = re.search("[IV](IV|IX)",s)
+        constraint_9_2_regex = re.search("[XL](XL|XC)",s)
+        constraint_9_3_regex = re.search("[CD](CD|CM)",s)
+
+        if (constraint_9_1_regex is not None or
+            constraint_9_2_regex is not None or
+            constraint_9_3_regex is not None
+        ):
+            print("Invalid roman numeral. A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string.")
+            print("'IV' or 'IX' cannot follow 'I' or 'V', 'XL' or 'XC' cannot follow 'X' or 'L', and 'CD' or 'CM' cannot follow 'C' or 'D'.")
+            return False
 
         """If 's' passes all constraints, run get_ordered_values"""
         self.get_ordered_values(s)
