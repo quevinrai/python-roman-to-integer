@@ -4,11 +4,10 @@ import re
 class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
     arabic_numbers = [1000, 500, 100, 50, 10, 5, 1]
-    ordered_values = list()
     total_values = list()
     ordered_operations = list()
 
-    def get_ordered_values(self, s: str):
+    def convert_roman_to_integer(self, s: str):
         s_length = len(s)
         s_iter = enumerate(iter(s))
         current_roman_numeral = ""
@@ -26,10 +25,6 @@ class Solution:
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "D") or
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M")
             ):
-                self.ordered_values.append(self.arabic_numbers[next_index])
-                self.ordered_operations.append("+")
-                self.ordered_values.append(self.arabic_numbers[current_index])
-                self.ordered_operations.append("-")
 
                 current_roman_numeral = self.roman_numerals[current_index] + self.roman_numerals[next_index]
                 current_integer_total = self.arabic_numbers[next_index] - self.arabic_numbers[current_index]
@@ -43,9 +38,6 @@ class Solution:
                 except StopIteration:
                     break
             else:
-                self.ordered_values.append(self.arabic_numbers[current_index])
-                self.ordered_operations.append("+")
-
                 current_roman_numeral += letter
                 current_integer_total += self.arabic_numbers[current_index]
 
@@ -166,6 +158,10 @@ class Solution:
         
         return True
 
+    def display_values(self, s: str):
+        for letter, key in self.total_values:
+            print(f"{letter} = {key}")
+
     def roman_to_int(self, s: str) -> int:
         previous_value = 0
         total = 0
@@ -174,7 +170,7 @@ class Solution:
         if not self.validate_string(s):
             sys.exit()
 
-        self.get_ordered_values(s)
+        self.convert_roman_to_integer(s)
 
         # Check if values are in descending order
         for total_values_tuple in self.total_values:
@@ -195,5 +191,5 @@ sol = Solution()
 print("ROMAN NUMERAL TO INTEGER")
 print("------------------------\n")
 print(f"Roman Numeral: {s}")
-print(f"Integer: {sol.roman_to_int(s.upper())}")
+print(f"Integer: {sol.roman_to_int(s.upper())}\n")
 print(sol.total_values)
