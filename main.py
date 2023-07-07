@@ -74,12 +74,31 @@ class Solution:
         'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
         """
 
-        constraint_four_regex = re.search("[MCXI]{4,}", s)
+        # constraint_four_regex = re.search("[MCXI]{4,}", s)
+        letter_count = 0
+        is_letter_count_exceeded = False
 
-        if (s.count("M") > 3 or
-            s.count("C") > 3 or
-            s.count("X") > 3 or
-            s.count("I") > 3
+        for i in range(len(s)):
+            try:
+                if (((s[i] == "M") or (s[i] == "C") or
+                    (s[i] == "X") or (s[i] == "I")) and
+                    s[i] == s[i + 1]
+                ):
+                    letter_count += 1
+
+                else:
+                    letter_count = 0
+            except:
+                break
+
+            if letter_count == 4:
+                is_letter_count_exceeded = True
+                break
+
+        if (s.count("M") > 3 and is_letter_count_exceeded or
+            s.count("C") > 3 and is_letter_count_exceeded or
+            s.count("X") > 3 and is_letter_count_exceeded or
+            s.count("I") > 3 and is_letter_count_exceeded
         ):
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
@@ -198,7 +217,7 @@ class Solution:
 
         return total
 
-s = "MCMXIV"
+s = "MMMCMXCIX"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
