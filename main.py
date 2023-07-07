@@ -5,13 +5,14 @@ class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
     arabic_numbers = [1000, 500, 100, 50, 10, 5, 1]
     total_values = list()
-    ordered_operations = list()
+    current_highest_length = 0
 
     def convert_roman_to_integer(self, s: str):
         s_length = len(s)
         s_iter = enumerate(iter(s))
         current_roman_numeral = ""
         current_integer_total = 0
+
 
         for i, letter in s_iter:
             current_index = self.roman_numerals.index(letter)
@@ -25,10 +26,12 @@ class Solution:
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "D") or
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M")
             ):
-
                 current_roman_numeral = self.roman_numerals[current_index] + self.roman_numerals[next_index]
                 current_integer_total = self.arabic_numbers[next_index] - self.arabic_numbers[current_index]
                 self.total_values.append((current_roman_numeral, current_integer_total))
+
+                if self.current_highest_length < len(current_roman_numeral):
+                    self.current_highest_length = len(current_roman_numeral)
 
                 current_roman_numeral = ""
                 current_integer_total = 0
@@ -40,6 +43,9 @@ class Solution:
             else:
                 current_roman_numeral += letter
                 current_integer_total += self.arabic_numbers[current_index]
+
+                if self.current_highest_length < len(current_roman_numeral):
+                    self.current_highest_length = len(current_roman_numeral)
 
                 if current_index != next_index:
                     self.total_values.append((current_roman_numeral, current_integer_total))
@@ -158,9 +164,14 @@ class Solution:
         
         return True
 
-    def display_values(self, s: str):
+    def display_values(self):
+        white_space_count1 = 0
+        white_space_count2 = 5
+
         for letter, key in self.total_values:
-            print(f"{letter} = {key}")
+            white_space_count1 = (self.current_highest_length - len(letter)) + 5
+
+            print(f"{letter}{' ' * white_space_count1}={' ' * white_space_count2}{key}")
 
     def roman_to_int(self, s: str) -> int:
         previous_value = 0
@@ -192,4 +203,4 @@ print("ROMAN NUMERAL TO INTEGER")
 print("------------------------\n")
 print(f"Roman Numeral: {s}")
 print(f"Integer: {sol.roman_to_int(s.upper())}\n")
-print(sol.total_values)
+sol.display_values()
