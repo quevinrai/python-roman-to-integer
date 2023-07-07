@@ -79,26 +79,25 @@ class Solution:
         is_letter_count_exceeded = False
 
         for i in range(len(s)):
-            try:
-                if (((s[i] == "M") or (s[i] == "C") or
-                    (s[i] == "X") or (s[i] == "I")) and
-                    s[i] == s[i + 1]
-                ):
-                    letter_count += 1
-
-                else:
-                    letter_count = 0
-            except:
-                break
+            if ((s[i] == "M") or (s[i] == "C") or
+                (s[i] == "X") or (s[i] == "I")
+            ):
+                letter_count += 1
 
             if letter_count == 4:
                 is_letter_count_exceeded = True
                 break
+            
+            try:
+                if (s[i] != s[i + 1]):
+                    letter_count = 0
+            except:
+                break
 
-        if (s.count("M") > 3 and is_letter_count_exceeded or
-            s.count("C") > 3 and is_letter_count_exceeded or
-            s.count("X") > 3 and is_letter_count_exceeded or
-            s.count("I") > 3 and is_letter_count_exceeded
+        if ((s.count("M") > 3 and is_letter_count_exceeded) or
+            (s.count("C") > 3 and is_letter_count_exceeded) or
+            (s.count("X") > 3 and is_letter_count_exceeded) or
+            (s.count("I") > 3 and is_letter_count_exceeded)
         ):
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
