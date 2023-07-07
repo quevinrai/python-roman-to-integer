@@ -88,6 +88,20 @@ class Solution:
             print("Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot).")
             print("Therefore, the following pairs of letter are invalid: 'VX', 'VL', 'VC', 'VD', 'VM', 'LC', 'LD', 'LM', 'DM'.")
             return False
+        
+        """CONSTRAINT #6:
+        
+        When subtracting, the value of the letter being subtracted from cannot be more than 10 times the
+        value of letter being used for subtraction.
+        Therefore, the following pairs of letters are invalid: IL, IC, ID, IM, XD, XM.
+        """
+
+        constraint_five_regex = re.search("[I][LCDM]|[X][DM]", s)
+
+        if constraint_five_regex is not None:
+            print("Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction.")
+            print("Therefore, the following pairs of letters are invalid: 'IL', 'IC', 'ID', 'IM', 'XD', 'XM'.")
+            return False
 
         # If 's' passes all constraints, run get_ordered_values
         self.get_ordered_values(s)
