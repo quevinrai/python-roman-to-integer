@@ -179,7 +179,7 @@ class Solution:
 s = "III"
 sol = Solution()
 
-print("----------------------------\n")
+print("----------------------------")
 print("+ ROMAN NUMERAL TO INTEGER +")
 print("----------------------------\n")
 
