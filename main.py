@@ -70,10 +70,7 @@ class Solution:
             
         """CONSTRAINT #3: 'D', 'L', and 'V' can only appear once"""
 
-        if (s.count("D") > 1 or
-            s.count("L") > 1 or
-            s.count("V") > 1
-        ):
+        if s.count("D") > 1 or s.count("L") > 1 or s.count("V") > 1:
             print("Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once.")
             return False
         
