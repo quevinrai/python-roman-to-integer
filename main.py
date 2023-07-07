@@ -176,11 +176,14 @@ class Solution:
 
         return total
 
-s = "MDCCLXIX"
+s = "III"
 sol = Solution()
 
-print("ROMAN NUMERAL TO INTEGER")
-print("------------------------\n")
+print("----------------------------\n")
+print("+ ROMAN NUMERAL TO INTEGER +")
+print("----------------------------\n")
+
 print(f"Roman Numeral: {s}")
 print(f"Integer: {sol.roman_to_int(s.upper())}\n")
+
 sol.display_values()
