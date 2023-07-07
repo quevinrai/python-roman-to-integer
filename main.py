@@ -70,9 +70,9 @@ class Solution:
         'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
         """
 
-        exp = re.search("[MCXI]{4,}", s)
+        constraint_four_regex = re.search("[MCXI]{4,}", s)
 
-        if exp is not None:
+        if constraint_four_regex is not None:
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
         
@@ -82,6 +82,13 @@ class Solution:
         Therefore, the following pairs of letter are invalid: VX, VL, VC, VD, VM, LC, LD, LM, DM.
         """
 
+        constraint_five_regex = re.search("[V][XLCDM]|[L][CDM]|[D][M]", s)
+
+        if constraint_five_regex is not None:
+            print("Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot).")
+            print("Therefore, the following pairs of letter are invalid: 'VX', 'VL', 'VC', 'VD', 'VM', 'LC', 'LD', 'LM', 'DM'.")
+            return False
+
         # If 's' passes all constraints, run get_ordered_values
         self.get_ordered_values(s)
 
@@ -89,7 +96,7 @@ class Solution:
         
         Order of roman numerals must be descending
         """
-        
+
         for i in range(len(self.ordered_values)):
             if i >= len(self.ordered_values) - 1:
                 break
