@@ -5,11 +5,14 @@ class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
     arabic_numbers = [1000, 500, 100, 50, 10, 5, 1]
     ordered_values = list()
+    total_values = list()
     ordered_operations = list()
 
     def get_ordered_values(self, s: str):
         s_length = len(s)
         s_iter = enumerate(iter(s))
+        current_roman_numeral = ""
+        current_integer_total = 0
 
         for i, letter in s_iter:
             current_index = self.roman_numerals.index(letter)
@@ -27,6 +30,14 @@ class Solution:
                 self.ordered_operations.append("+")
                 self.ordered_values.append(self.arabic_numbers[current_index])
                 self.ordered_operations.append("-")
+
+                current_roman_numeral = self.roman_numerals[current_index] + self.roman_numerals[next_index]
+                current_integer_total = self.arabic_numbers[next_index] - self.arabic_numbers[current_index]
+                self.total_values.append((current_roman_numeral, current_integer_total))
+
+                current_roman_numeral = ""
+                current_integer_total = 0
+                
                 try:
                     next(s_iter)
                 except StopIteration:
@@ -34,6 +45,14 @@ class Solution:
             else:
                 self.ordered_values.append(self.arabic_numbers[current_index])
                 self.ordered_operations.append("+")
+
+                current_roman_numeral += letter
+                current_integer_total += self.arabic_numbers[current_index]
+
+                if current_index != next_index:
+                    self.total_values.append((current_roman_numeral, current_integer_total))
+                    current_roman_numeral = ""
+                    current_integer_total = 0
 
     def validate_string(self, s: str) -> bool:
         """CONSTRAINT #1:
@@ -181,42 +200,46 @@ class Solution:
             return False
 
         """If 's' passes all constraints, run get_ordered_values"""
-        self.get_ordered_values(s)
+        # self.get_ordered_values(s)
 
         """RULE 1:
         
         Order of roman numerals must be descending
         """
 
-        for i in range(len(self.ordered_values)):
-            if i >= len(self.ordered_values) - 1:
-                break
+        # for i in range(len(self.ordered_values)):
+        #     if i >= len(self.ordered_values) - 1:
+        #         break
 
-            if self.ordered_values[i] < self.ordered_values[i + 1]:
-                print("Invalid roman numerator. Values are not in descending order.")
-                return False
+        #     if self.ordered_values[i] < self.ordered_values[i + 1]:
+        #         print("Invalid roman numerator. Values are not in descending order.")
+        #         return False
         
         return True
 
     def roman_to_int(self, s: str) -> int:
+        total = 0
+
         # Check if validateString method returns false, then exit system
         if not self.validate_string(s):
             sys.exit()
 
-        # Variable declarations
-        total = 0
+        self.get_ordered_values(s)
 
+        # Check if values are in descending order
+        for total_values_tuple in self.total_values:
+            for _, val in total_values_tuple:
+                if self.ordered_values[i] < self.ordered_values[i + 1]:
+                    sys.exit("Invalid roman numerator. Values are not in descending order.")
 
-        # Loop through all characters of 's' string
-        for i in range(len(self.ordered_values)):
-            if self.ordered_operations[i] == "+":
-                total += self.ordered_values[i]
-            elif self.ordered_operations[i] == "-":
-                total -= self.ordered_values[i]
+        # Loop through list of total values
+        for total_values_tuple in self.total_values:
+            for _, val in total_values_tuple:
+                total += val
 
         return total
 
-s = "MMMCMXCIX"
+s = "MDCCLXIX"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
@@ -224,3 +247,4 @@ print("------------------------\n")
 print(f"Roman Numeral: {s}")
 print(f"Integer: {sol.roman_to_int(s.upper())}")
 print(sol.ordered_values)
+print(sol.total_values)
