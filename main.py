@@ -32,7 +32,7 @@ class Solution:
                 self.ordered_values.append(self.arabic_numbers[current_index])
 
     def validate_string(self, s: str) -> bool:
-        """RULE #1:
+        """CONSTRAINT #1:
         
         's' string length is between 1 - 15 inclusive
         """
