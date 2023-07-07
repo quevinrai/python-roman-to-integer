@@ -96,14 +96,27 @@ class Solution:
         Therefore, the following pairs of letters are invalid: IL, IC, ID, IM, XD, XM.
         """
 
-        constraint_five_regex = re.search("[I][LCDM]|[X][DM]", s)
+        constraint_six_regex = re.search("[I][LCDM]|[X][DM]", s)
 
-        if constraint_five_regex is not None:
+        if constraint_six_regex is not None:
             print("Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction.")
             print("Therefore, the following pairs of letters are invalid: 'IL', 'IC', 'ID', 'IM', 'XD', 'XM'.")
             return False
+        
+        """CONSTRAINT #7:
+        
+        Once a letter has been used as a subtraction modifier, that letter cannot appear again in
+        the string, unless that letter itself is subtracted from.
+        """
 
-        # If 's' passes all constraints, run get_ordered_values
+        constraint_7_1_regex = re.search("(CM|CD)[C]", s)
+        constraint_7_2_regex = re.search("(XC|XL)[X]", s)
+
+        if constraint_7_1_regex is not None or constraint_7_2_regex is not None:
+            print("Invalid roman numeral. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from.")
+            return False
+
+        """If 's' passes all constraints, run get_ordered_values"""
         self.get_ordered_values(s)
 
         """RULE 1:
