@@ -55,19 +55,13 @@ class Solution:
                     current_integer_total = 0
 
     def validate_string(self, s: str) -> bool:
-        """CONSTRAINT #1:
-        
-        's' string length is between 1 - 15 inclusive
-        """
+        """CONSTRAINT #1: 's' string length is between 1 - 15 inclusive"""
 
         if len(s) < 1 or len(s) > 15:
             print("The length of the roman numerals entered must be from 1 to 15.")
             return False
         
-        """CONSTRAINT #2:
-        
-        Throw error if the roman numeral entered contains an invalid character.
-        """
+        """CONSTRAINT #2: Throw error if the roman numeral entered contains an invalid character"""
 
         for i in range(len(s)):
             try:
@@ -76,10 +70,7 @@ class Solution:
                 print("Roman numerals can only contain the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').")
                 return False
             
-        """CONSTRAINT #3:
-        
-        'D', 'L', and 'V' can only appear once
-        """
+        """CONSTRAINT #3: 'D', 'L', and 'V' can only appear once"""
 
         if (s.count("D") > 1 or
             s.count("L") > 1 or
@@ -88,10 +79,7 @@ class Solution:
             print("Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once.")
             return False
         
-        """CONSTRAINT #4:
-        
-        'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string
-        """
+        """CONSTRAINT #4: 'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string"""
 
         # constraint_four_regex = re.search("[MCXI]{4,}", s)
         letter_count = 0
@@ -121,11 +109,7 @@ class Solution:
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
         
-        """CONSTRAINT #5:
-        
-        Only I, X, and C can be used for subtraction (V, L, and D cannot).
-        Therefore, the following pairs of letter are invalid: VX, VL, VC, VD, VM, LC, LD, LM, DM.
-        """
+        """CONSTRAINT #5: Only I, X, and C can be used for subtraction (V, L, and D cannot)"""
 
         constraint_5_regex = re.search("[V][XLCDM]|[L][CDM]|[D][M]", s)
 
@@ -134,12 +118,7 @@ class Solution:
             print("Therefore, the following pairs of letter are invalid: 'VX', 'VL', 'VC', 'VD', 'VM', 'LC', 'LD', 'LM', 'DM'.")
             return False
         
-        """CONSTRAINT #6:
-        
-        When subtracting, the value of the letter being subtracted from cannot be more than 10 times the
-        value of letter being used for subtraction.
-        Therefore, the following pairs of letters are invalid: IL, IC, ID, IM, XD, XM.
-        """
+        """CONSTRAINT #6: When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction"""
 
         constraint_6_regex = re.search("[I][LCDM]|[X][DM]", s)
 
@@ -148,25 +127,16 @@ class Solution:
             print("Therefore, the following pairs of letters are invalid: 'IL', 'IC', 'ID', 'IM', 'XD', 'XM'.")
             return False
         
-        """CONSTRAINT #7:
-        
-        Once a letter has been used as a subtraction modifier, that letter cannot appear again in
-        the string, unless that letter itself is subtracted from.
-        """
+        """CONSTRAINT #7: Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from"""
 
         constraint_7_1_regex = re.search("(CM|CD)[C]", s)
         constraint_7_2_regex = re.search("(XC|XL)[X]", s)
 
         if constraint_7_1_regex is not None or constraint_7_2_regex is not None:
-            print("Invalid roman numeral. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from.")
+            print("Invalid roman numeral. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from")
             return False
         
-        """CONSTRAINT #8:
-        
-        Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may
-        appear again in the string - so neither X nor V can follow IX, neither C nor L may follow XC, and
-        neither M nor D may follow CM.
-        """
+        """CONSTRAINT #8: Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string"""
 
         constraint_8_1_regex = re.search("IX[XV]", s)
         constraint_8_2_regex = re.search("XC[CL]", s)
@@ -180,12 +150,7 @@ class Solution:
             print("Neither X nor V can follow IX, neither C nor L may follow XC, and neither M nor D may follow CM.")
             return False
         
-        """CONSTRAINT #9:
-        
-        A letter cannot be used as a subtraction modifier if that letter, or the next highest
-        multiple of 5, appears previously in the string - so IV or IX cannot follow I or V, XL or
-        XC cannot follow X or L, and CD or CM cannot follow C or D.
-        """
+        """CONSTRAINT #9: A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string"""
 
         constraint_9_1_regex = re.search("[IV](IV|IX)",s)
         constraint_9_2_regex = re.search("[XL](XL|XC)",s)
@@ -198,26 +163,11 @@ class Solution:
             print("Invalid roman numeral. A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string.")
             print("'IV' or 'IX' cannot follow 'I' or 'V', 'XL' or 'XC' cannot follow 'X' or 'L', and 'CD' or 'CM' cannot follow 'C' or 'D'.")
             return False
-
-        """If 's' passes all constraints, run get_ordered_values"""
-        # self.get_ordered_values(s)
-
-        """RULE 1:
-        
-        Order of roman numerals must be descending
-        """
-
-        # for i in range(len(self.ordered_values)):
-        #     if i >= len(self.ordered_values) - 1:
-        #         break
-
-        #     if self.ordered_values[i] < self.ordered_values[i + 1]:
-        #         print("Invalid roman numerator. Values are not in descending order.")
-        #         return False
         
         return True
 
     def roman_to_int(self, s: str) -> int:
+        previous_value = 0
         total = 0
 
         # Check if validateString method returns false, then exit system
@@ -228,14 +178,14 @@ class Solution:
 
         # Check if values are in descending order
         for total_values_tuple in self.total_values:
-            for _, val in total_values_tuple:
-                if self.ordered_values[i] < self.ordered_values[i + 1]:
-                    sys.exit("Invalid roman numerator. Values are not in descending order.")
+            if previous_value < total_values_tuple[1] and previous_value != 0:
+                sys.exit("Invalid roman numerator. Values are not in descending order.")
+            else:
+                previous_value = total_values_tuple[1]
 
         # Loop through list of total values
         for total_values_tuple in self.total_values:
-            for _, val in total_values_tuple:
-                total += val
+            total += total_values_tuple[1]
 
         return total
 
@@ -246,5 +196,4 @@ print("ROMAN NUMERAL TO INTEGER")
 print("------------------------\n")
 print(f"Roman Numeral: {s}")
 print(f"Integer: {sol.roman_to_int(s.upper())}")
-print(sol.ordered_values)
 print(sol.total_values)
