@@ -186,4 +186,8 @@ print("----------------------------\n")
 print(f"Roman Numeral: {s}")
 print(f"Integer: {sol.roman_to_int(s.upper())}\n")
 
+print("----------------------------")
+print("+         BREAKDOWN        +")
+print("----------------------------\n")
+
 sol.display_values()
