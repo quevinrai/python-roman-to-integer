@@ -165,7 +165,7 @@ class Solution:
         
         A letter cannot be used as a subtraction modifier if that letter, or the next highest
         multiple of 5, appears previously in the string - so IV or IX cannot follow I or V, XL or
-        XC cannot follow X or L, and CD or CM cannot follow C or D.
+        XC cannot follow X or L, and CD or CM cannot follow C or .
         """
 
         constraint_9_1_regex = re.search("[IV](IV|IX)",s)
