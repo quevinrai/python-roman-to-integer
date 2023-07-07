@@ -6,6 +6,8 @@ class Solution:
     arabic_numbers = [1000, 500, 100, 50, 10, 5, 1]
     total_values = list()
     current_highest_length = 0
+    is_validation_invalid = False
+    validation_error_message = ""
 
     def convert_roman_to_integer(self, s: str):
         s_length = len(s)
@@ -52,13 +54,6 @@ class Solution:
                     current_roman_numeral = ""
                     current_integer_total = 0
 
-        # Check if values are in descending order
-        for total_values_tuple in self.total_values:
-            if previous_value < total_values_tuple[1] and previous_value != 0:
-                sys.exit("Invalid roman numerator. Values are not in descending order.")
-            else:
-                previous_value = total_values_tuple[1]
-
     def validate_string(self, s: str):
         """RULE #1: 's' string length is between 1 - 15 inclusive"""
 
@@ -99,23 +94,23 @@ class Solution:
         """RULE #5: Only I, X, and C can be used for subtraction (V, L, and D cannot)"""
 
         for i in range(len(s)):
-            if i >= len(s) - 1:
+            try:
+                if (s[i] == "V" and s[i + 1] == "X" or
+                    s[i] == "V" and s[i + 1] == "L" or
+                    s[i] == "V" and s[i + 1] == "C" or
+                    s[i] == "V" and s[i + 1] == "D" or
+                    s[i] == "V" and s[i + 1] == "M" or
+                    s[i] == "L" and s[i + 1] == "C" or
+                    s[i] == "L" and s[i + 1] == "D" or
+                    s[i] == "L" and s[i + 1] == "M" or
+                    s[i] == "D" and s[i + 1] == "M"
+                ):
+                    self.validation_error_message = "Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot)."
+            except:
                 break
-
-            if (s[i] == "V" and s[i + 1] == "X" or
-                s[i] == "V" and s[i + 1] == "L" or
-                s[i] == "V" and s[i + 1] == "C" or
-                s[i] == "V" and s[i + 1] == "D" or
-                s[i] == "V" and s[i + 1] == "M" or
-                s[i] == "L" and s[i + 1] == "C" or
-                s[i] == "L" and s[i + 1] == "D" or
-                s[i] == "L" and s[i + 1] == "M" or
-                s[i] == "D" and s[i + 1] == "M"
-            ):
-                sys.exit("Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot).")
         
         """RULE #6: When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction"""
-
+        
         for i in range(len(s)):
             try:
                 if (s[i] == "I" and s[i + 1] == "L" or
@@ -125,7 +120,7 @@ class Solution:
                     s[i] == "X" and s[i + 1] == "D" or
                     s[i] == "X" and s[i + 1] == "M"
                 ):
-                    sys.exit("Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction.")
+                    self.validation_error_message = "Invalid roman numeral. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction."
             except:
                 break
         
@@ -160,6 +155,16 @@ class Solution:
             constraint_9_3_regex is not None
         ):
             sys.exit("Invalid roman numeral. A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string.")
+
+        # Check if values are in descending order
+        for total_values_tuple in self.total_values:
+            if previous_value < total_values_tuple[1] and previous_value != 0:
+                sys.exit("Invalid roman numerator. Values are not in descending order.")
+            else:
+                previous_value = total_values_tuple[1]
+
+        if self.validation_error_message != "":
+            sys.exit(self.validation_error_message)
 
     def display_values(self):
         white_space_count1 = 0
