@@ -1,5 +1,4 @@
 import sys
-import re
 
 class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
