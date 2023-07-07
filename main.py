@@ -216,7 +216,7 @@ class Solution:
 
         return total
 
-s = "MMMCMXCIX"
+s = "MMMMCMXCIX"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
