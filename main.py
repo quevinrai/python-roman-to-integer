@@ -1,4 +1,5 @@
 import sys
+import re
 
 class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
@@ -80,37 +81,38 @@ class Solution:
         """RULE #4: 'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string"""
 
         letter_count = 0
-        is_letter_count_exceeded = False
 
         for i in range(len(s)):
-            if ((s[i] == "M") or (s[i] == "C") or
-                (s[i] == "X") or (s[i] == "I")
-            ):
+            if s[i] == "M" or s[i] == "C" or s[i] == "X" or s[i] == "I":
                 letter_count += 1
 
             if letter_count == 4:
-                is_letter_count_exceeded = True
-                break
+                if s.count("M") > 3 or s.count("C") > 3 or s.count("X") > 3 or s.count("I") > 3:
+                    sys.exit("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             
             try:
-                if (s[i] != s[i + 1]):
+                if s[i] != s[i + 1]:
                     letter_count = 0
             except:
                 break
-
-        if ((s.count("M") > 3 and is_letter_count_exceeded) or
-            (s.count("C") > 3 and is_letter_count_exceeded) or
-            (s.count("X") > 3 and is_letter_count_exceeded) or
-            (s.count("I") > 3 and is_letter_count_exceeded)
-        ):
-            sys.exit("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
         
         """RULE #5: Only I, X, and C can be used for subtraction (V, L, and D cannot)"""
 
-        constraint_5_regex = re.search("[V][XLCDM]|[L][CDM]|[D][M]", s)
+        for i in range(len(s)):
+            if i >= len(s) - 1:
+                break
 
-        if constraint_5_regex is not None:
-            sys.exit("Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot).")
+            if (s[i] == "V" and s[i + 1] == "X" or
+                s[i] == "V" and s[i + 1] == "L" or
+                s[i] == "V" and s[i + 1] == "C" or
+                s[i] == "V" and s[i + 1] == "D" or
+                s[i] == "V" and s[i + 1] == "M" or
+                s[i] == "L" and s[i + 1] == "C" or
+                s[i] == "L" and s[i + 1] == "D" or
+                s[i] == "L" and s[i + 1] == "M" or
+                s[i] == "D" and s[i + 1] == "M"
+            ):
+                sys.exit("Invalid roman numeral. Only 'I', 'X', and 'C' can be used for subtraction ('V', 'L', and 'D' cannot).")
         
         """RULE #6: When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction"""
 
@@ -175,18 +177,18 @@ class Solution:
 
         return total
 
-s = "III"
 sol = Solution()
 
-print("----------------------------")
-print("+ ROMAN NUMERAL TO INTEGER +")
-print("----------------------------\n")
+print("------------------------------")
+print(" + ROMAN NUMERAL TO INTEGER + ")
+print("------------------------------\n")
 
-print(f"Roman Numeral: {s}")
-print(f"Integer: {sol.roman_to_int(s.upper())}\n")
+s = input("Input: ")
+print(f"Input: {s}")
+print(f"Output: {sol.roman_to_int(s.upper())}\n")
 
-print("----------------------------")
-print("+         BREAKDOWN        +")
-print("----------------------------\n")
+print("------------------------------")
+print(" +          BREAKDOWN       + ")
+print("------------------------------\n")
 
 sol.display_values()
