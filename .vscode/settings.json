@@ -1,3 +1,4 @@
 {
-    "git.suggestSmartCommit": false
+    "git.suggestSmartCommit": false,
+    "git.smartCommitChanges": "tracked"
 }
