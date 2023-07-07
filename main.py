@@ -187,7 +187,7 @@ class Solution:
 
         return total
 
-s = "CL"
+s = "MCMXIV"
 sol = Solution()
 
 print("ROMAN NUMERAL TO INTEGER")
