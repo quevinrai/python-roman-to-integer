@@ -5,6 +5,7 @@ class Solution:
     roman_numerals = ["M", "D", "C", "L", "X", "V", "I"]
     arabic_numbers = [1000, 500, 100, 50, 10, 5, 1]
     ordered_values = list()
+    ordered_operations = list()
 
     def get_ordered_values(self, s: str):
         s_length = len(s)
@@ -23,13 +24,16 @@ class Solution:
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M")
             ):
                 self.ordered_values.append(self.arabic_numbers[next_index])
+                self.ordered_operations.append("+")
                 self.ordered_values.append(self.arabic_numbers[current_index])
+                self.ordered_operations.append("-")
                 try:
                     next(s_iter)
                 except StopIteration:
                     break
             else:
                 self.ordered_values.append(self.arabic_numbers[current_index])
+                self.ordered_operations.append("+")
 
     def validate_string(self, s: str) -> bool:
         """CONSTRAINT #1:
@@ -72,7 +76,11 @@ class Solution:
 
         constraint_four_regex = re.search("[MCXI]{4,}", s)
 
-        if constraint_four_regex is not None:
+        if (s.count("M") > 3 or
+            s.count("C") > 3 or
+            s.count("X") > 3 or
+            s.count("I") > 3
+        ):
             print("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
             return False
         
@@ -183,7 +191,10 @@ class Solution:
 
         # Loop through all characters of 's' string
         for i in range(len(self.ordered_values)):
-            total += self.ordered_values[i]
+            if self.ordered_operations[i] == "+":
+                total += self.ordered_values[i]
+            elif self.ordered_operations[i] == "-":
+                total -= self.ordered_values[i]
 
         return total
 
