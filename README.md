@@ -28,7 +28,7 @@ Given a roman numeral, convert it to an integer.
 
 ## Usage
 
-**Example 1:**
+### Example 1:
 
     "------------------------------"
     "+  ROMAN NUMERAL TO INTEGER + "
@@ -44,7 +44,7 @@ Given a roman numeral, convert it to an integer.
     III     =     3
     
 
-**Example 2:**
+### Example 2:
 
     "------------------------------"
     "+  ROMAN NUMERAL TO INTEGER + "
@@ -61,7 +61,7 @@ Given a roman numeral, convert it to an integer.
     V       =     5
     III     =     3
 
-**Example 3:**
+### Example 3:
 
     "------------------------------"
     "+  ROMAN NUMERAL TO INTEGER + "
