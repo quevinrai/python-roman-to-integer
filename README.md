@@ -32,7 +32,7 @@ Given a roman numeral, convert it to an integer.
     ```sh
     git clone https://github.com/quevinrai/python-roman-to-integer.git
     ```
-2. In your IDE, open a terminal and run `main.py`
+2. In your IDE, open a terminal and run the project
     ```sh
     python main.py
     ```
@@ -112,3 +112,4 @@ Given a roman numeral, convert it to an integer.
 
 - LeetCode Challenege 13: Roman to Integer ([link](https://leetcode.com/problems/roman-to-integer/?envType=featured-list&envId=challenges-for-new-users))
 - TheVBProgrammer Programming Exercies: Roman Numerals ([link](https://www.thevbprogrammer.com/Ch08/08-10-RomanNumerals.htm#:~:text=Similarly%2C%20XCX%20is%20not%20valid,in%20the%20case%20of%20IX.))
+- CalculatorSoup: Roman Numeral Converter ([link](https://www.calculatorsoup.com/calculators/conversions/roman-numeral-converter.php))
