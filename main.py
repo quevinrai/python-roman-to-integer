@@ -14,7 +14,6 @@ class Solution:
         s_iter = enumerate(iter(s))
         current_roman_numeral = ""
         current_integer_total = 0
-        previous_value = 0
 
         for i, letter in s_iter:
             current_index = self.roman_numerals.index(letter)
@@ -173,10 +172,13 @@ class Solution:
             except:
                 break
 
-        # Check if values are in descending order
+        """RULE #10: Values must be in descending order"""
+        previous_value = 0
+
         for total_values_tuple in self.total_values:
             if previous_value < total_values_tuple[1] and previous_value != 0:
-                sys.exit("Invalid roman numerator. Values are not in descending order.")
+                self.validation_error_message = "Invalid roman numerator. Values are not in descending order."
+                break
             else:
                 previous_value = total_values_tuple[1]
 
