@@ -58,7 +58,7 @@ class Solution:
         """RULE #1: 's' string length is between 1 - 15 inclusive"""
 
         if len(s) < 1 or len(s) > 15:
-            sys.exit("The length of the roman numerals entered must be from 1 to 15.")
+            self.validation_error_message = "The length of the roman numerals entered must be from 1 to 15."
         
         """RULE #2: Throw error if the roman numeral entered contains an invalid character"""
 
