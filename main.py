@@ -154,15 +154,24 @@ class Solution:
         
         """RULE #9: A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string"""
 
-        constraint_9_1_regex = re.search("[IV](IV|IX)",s)
-        constraint_9_2_regex = re.search("[XL](XL|XC)",s)
-        constraint_9_3_regex = re.search("[CD](CD|CM)",s)
-
-        if (constraint_9_1_regex is not None or
-            constraint_9_2_regex is not None or
-            constraint_9_3_regex is not None
-        ):
-            sys.exit("Invalid roman numeral. A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string.")
+        for i in range(len(s)):
+            try:
+                if (s[i] == "I" and s[i + 1] == "I" and s[i + 2] == "V" or
+                    s[i] == "I" and s[i + 1] == "I" and s[i + 2] == "X" or
+                    s[i] == "V" and s[i + 1] == "I" and s[i + 2] == "V" or
+                    s[i] == "V" and s[i + 1] == "I" and s[i + 2] == "X" or
+                    s[i] == "X" and s[i + 1] == "X" and s[i + 2] == "L" or
+                    s[i] == "X" and s[i + 1] == "X" and s[i + 2] == "C" or
+                    s[i] == "L" and s[i + 1] == "X" and s[i + 2] == "L" or
+                    s[i] == "L" and s[i + 1] == "X" and s[i + 2] == "C" or
+                    s[i] == "C" and s[i + 1] == "C" and s[i + 2] == "D" or
+                    s[i] == "C" and s[i + 1] == "C" and s[i + 2] == "M" or
+                    s[i] == "D" and s[i + 1] == "C" and s[i + 2] == "D" or
+                    s[i] == "D" and s[i + 1] == "C" and s[i + 2] == "M" 
+                ):
+                    self.validation_error_message = "Invalid roman numeral. A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string."
+            except:
+                break
 
         # Check if values are in descending order
         for total_values_tuple in self.total_values:
