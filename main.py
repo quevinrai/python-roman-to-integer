@@ -27,7 +27,7 @@ class Solution:
                 (self.roman_numerals[current_index] == "X" and self.roman_numerals[next_index] == "L") or
                 (self.roman_numerals[current_index] == "X" and self.roman_numerals[next_index] == "C") or
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "D") or
-                (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M" and next_index != 0)
+                (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M" and i != s_length - 1)
             ):
                 current_roman_numeral = self.roman_numerals[current_index] + self.roman_numerals[next_index]
                 current_integer_total = self.arabic_numbers[next_index] - self.arabic_numbers[current_index]
@@ -50,7 +50,7 @@ class Solution:
                 if self.current_highest_length < len(current_roman_numeral):
                     self.current_highest_length = len(current_roman_numeral)
 
-                if current_index != next_index or next_index == 0:
+                if current_index != next_index or i == s_length - 1:
                     self.total_values.append((current_roman_numeral, current_integer_total))
                     current_roman_numeral = ""
                     current_integer_total = 0
