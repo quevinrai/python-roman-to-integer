@@ -126,11 +126,16 @@ class Solution:
         
         """RULE #7: Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from"""
 
-        constraint_7_1_regex = re.search("(CM|CD)[C]", s)
-        constraint_7_2_regex = re.search("(XC|XL)[X]", s)
-
-        if constraint_7_1_regex is not None or constraint_7_2_regex is not None:
-            sys.exit("Invalid roman numeral. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from")
+        for i in range(len(s)):
+            try:
+                if (s[i] == "C" and s[i + 1] == "M" and s[i + 2] == "C" or
+                    s[i] == "C" and s[i + 1] == "D" and s[i + 2] == "C" or
+                    s[i] == "X" and s[i + 1] == "X" and s[i + 2] == "X" or
+                    s[i] == "C" and s[i + 1] == "L" and s[i + 2] == "X"
+                ):
+                    self.validation_error_message = "Invalid roman numeral. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from."
+            except:
+                break
         
         """RULE #8: Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string"""
 
