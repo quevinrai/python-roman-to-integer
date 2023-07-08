@@ -93,9 +93,9 @@ Given a roman numeral, convert it to an integer.
 ## Rules
 
 1. `1 <= s.length <= 15`
-2. `'s'` contains only the characters `(I, V, X, L, C, D, M)`
-3. **D**, **L**, and **V** can only appear once
-4. M, C, X, or I may appear no more that three times consecutively in the string
+2. `'s'` contains only the characters `(I, V, X, L, C, D, M)`.
+3. **D**, **L**, and **V** can only appear once.
+4. M, C, X, or I may appear no more that three times consecutively in the string.
 5. Only **I**, **X**, and **C** can be used for subtraction (V, L, and D cannot). Therefore, the following pairs of letter are invalid: **VX**, **VL**, **VC**, **VD**, **VM**, **LC**, **LD**, **LM**, **DM**.
 6. When subtracting, the value of the letter being subtracted from cannot be more than 10 times the value of letter being used for subtraction. Therefore, the following pairs of letters are invalid: **IL**, **IC**, **ID**, **IM**, **XD**, **XM**.
 7. Once a letter has been used as a subtraction modifier, that letter cannot appear again in the string, unless that letter itself is subtracted from. For example, **CDC** is not valid (you would be subtracting 100 from 500, then adding it right back) – but **CDXC** (for 490) is valid. Similarly, **XCX** is not valid, but **XCIX** is.
