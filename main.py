@@ -83,7 +83,7 @@ class Solution:
 
             if letter_count == 4:
                 if s.count("M") > 3 or s.count("C") > 3 or s.count("X") > 3 or s.count("I") > 3:
-                    sys.exit("Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively.")
+                    self.validation_error_message = "Invalid roman numeral. The letters 'M', 'C', 'X', and 'I' cannot appear more than three times consecutively."
             
             try:
                 if s[i] != s[i + 1]:
