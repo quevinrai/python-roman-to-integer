@@ -182,6 +182,7 @@ class Solution:
             else:
                 previous_value = total_values_tuple[1]
 
+        """Check if there was a validation error message captured"""
         if self.validation_error_message != "":
             sys.exit(self.validation_error_message)
 
