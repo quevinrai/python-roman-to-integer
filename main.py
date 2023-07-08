@@ -11,12 +11,15 @@ class Solution:
     def convert_roman_to_integer(self, s: str):
         s_length = len(s)
         s_iter = enumerate(iter(s))
+        current_index = 0
+        next_index = 0
         current_roman_numeral = ""
         current_integer_total = 0
 
         for i, letter in s_iter:
             current_index = self.roman_numerals.index(letter)
-            next_index = self.roman_numerals.index(s[i + 1]) if i < s_length - 1 else 0
+            if i < s_length - 1:
+                next_index = self.roman_numerals.index(s[i + 1])
 
             if(
                 (self.roman_numerals[current_index] == "I" and self.roman_numerals[next_index] == "V") or
@@ -24,7 +27,7 @@ class Solution:
                 (self.roman_numerals[current_index] == "X" and self.roman_numerals[next_index] == "L") or
                 (self.roman_numerals[current_index] == "X" and self.roman_numerals[next_index] == "C") or
                 (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "D") or
-                (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M")
+                (self.roman_numerals[current_index] == "C" and self.roman_numerals[next_index] == "M" and next_index != 0)
             ):
                 current_roman_numeral = self.roman_numerals[current_index] + self.roman_numerals[next_index]
                 current_integer_total = self.arabic_numbers[next_index] - self.arabic_numbers[current_index]
@@ -47,7 +50,7 @@ class Solution:
                 if self.current_highest_length < len(current_roman_numeral):
                     self.current_highest_length = len(current_roman_numeral)
 
-                if current_index != next_index:
+                if current_index != next_index or next_index == 0:
                     self.total_values.append((current_roman_numeral, current_integer_total))
                     current_roman_numeral = ""
                     current_integer_total = 0
