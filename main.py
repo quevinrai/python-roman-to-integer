@@ -197,7 +197,7 @@ print(" + ROMAN NUMERAL TO INTEGER + ")
 print("------------------------------\n")
 
 s = input("Input: ")
-print(f"Input: {s}")
+print(f"Input: {s.upper()}")
 print(f"Output: {sol.roman_to_int(s.upper())}\n")
 
 print("------------------------------")
