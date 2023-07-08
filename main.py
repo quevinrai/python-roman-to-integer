@@ -71,7 +71,7 @@ class Solution:
         """RULE #3: 'D', 'L', and 'V' can only appear once"""
 
         if s.count("D") > 1 or s.count("L") > 1 or s.count("V") > 1:
-            sys.exit("Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once.")
+            self.validation_error_message = "Invalid roman numeral. The letters 'D', 'L', and 'V' can only appear once."
         
         """RULE #4: 'M', 'C', 'X', or 'I' may appear no more that three times consecutively in the string"""
 
