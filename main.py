@@ -139,15 +139,18 @@ class Solution:
         
         """RULE #8: Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string"""
 
-        constraint_8_1_regex = re.search("IX[XV]", s)
-        constraint_8_2_regex = re.search("XC[CL]", s)
-        constraint_8_3_regex = re.search("CM[MD]", s)
-
-        if (constraint_8_1_regex is not None or
-            constraint_8_2_regex is not None or
-            constraint_8_3_regex is not None
-        ):
-            sys.exit("Invalid roman numeral. Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string.")
+        for i in range(len(s)):
+            try:
+                if (s[i] == "I" and s[i + 1] == "X" and s[i + 2] == "X" or
+                    s[i] == "I" and s[i + 1] == "X" and s[i + 2] == "V" or
+                    s[i] == "X" and s[i + 1] == "C" and s[i + 2] == "C" or
+                    s[i] == "X" and s[i + 1] == "C" and s[i + 2] == "L" or
+                    s[i] == "C" and s[i + 1] == "M" and s[i + 2] == "M" or
+                    s[i] == "C" and s[i + 1] == "M" and s[i + 2] == "D"
+                ):
+                    self.validation_error_message = "Invalid roman numeral. Once a letter has been subtracted from, neither it nor the next lowest multiple of 5 may appear again in the string."
+            except:
+                break
         
         """RULE #9: A letter cannot be used as a subtraction modifier if that letter, or the next highest multiple of 5, appears previously in the string"""
 
