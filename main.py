@@ -66,7 +66,7 @@ class Solution:
             try:
                 self.roman_numerals.index(s[i])
             except:
-                sys.exit("Roman numerals can only contain the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').")
+                self.validation_error_message = "Roman numerals can only contain the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M')."
             
         """RULE #3: 'D', 'L', and 'V' can only appear once"""
 
